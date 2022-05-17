@@ -399,6 +399,34 @@ def extract_spectrogram(values, clip, target):
     values.append(new_entry)
 
 
+from datetime import datetime
+def save_audio(file):
+    # if file.size > 4000000:
+    #     return 1
+    # if not os.path.exists("audio"):
+    #     os.makedirs("audio")
+    folder = "demo_audio"
+    datetoday = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    # clear the folder to avoid storage overload
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+    try:
+        with open("log0.txt", "a") as f:
+            f.write(f"{file.name} - {file.size} - {datetoday};\n")
+    except:
+        pass
+
+    with open(os.path.join(folder, file.name), "wb") as f:
+        f.write(file.getbuffer())
+    return 0
+
+
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -417,7 +445,6 @@ analysis = st.sidebar.selectbox('选择应用', ['音乐流派分类Demo'])
 st.set_option('deprecation.showfileUploaderEncoding', False)
 if analysis=='数据可视化分析':
     st.title('')
-
 else:
     st.title('音乐流派分类Demo')
     st.write('本项目基于深度学习中的迁移学习算法，利用图像领域的预训练模型Resnet50，结合GTZAN数据集中音乐文件的梅尔谱图，对输入文件的音乐流派进行预测分析。')
@@ -431,6 +458,7 @@ else:
     # model = keras.models.load_model('mnist_model', compile=False)
     if wav_files:
         for wav_file in wav_files:
+            save_demo_audio = save_audio(wav_file)
             # path = '/home/xuechen/NKU/大四下/音乐流派分类/Code/20211208/dataset/gtzan/'
             path = 'demo_audio'
             genre = wav_file.name.split('.')[0]
