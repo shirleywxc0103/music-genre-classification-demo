@@ -5,8 +5,8 @@ torch.backends.cudnn.benchmark = False
 import numpy as np
 np.random.seed(0)
 
-from torch.optim.lr_scheduler import ReduceLROnPlateau
-import data_manager
+# from torch.optim.lr_scheduler import ReduceLROnPlateau
+# import data_manager
 # from src.cnn2D.model.custom_upchannel import *
 from hparams import hparams
 import torch.nn.functional as F
