@@ -429,10 +429,11 @@ else:
     # model = keras.models.load_model('mnist_model', compile=False)
     if wav_files:
         for wav_file in wav_files:
-            path = '/home/xuechen/NKU/大四下/音乐流派分类/Code/20211208/dataset/gtzan/'
+            # path = '/home/xuechen/NKU/大四下/音乐流派分类/Code/20211208/dataset/gtzan/'
+            path = 'demo_audio'
             genre = wav_file.name.split('.')[0]
             print(genre)
-            path += genre
+            # path += genre
             audio_file = open(path + '/' + wav_file.name, 'rb')
             audio_bytes = audio_file.read()
         # print(audio_bytes)
