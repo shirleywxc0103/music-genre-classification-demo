@@ -448,6 +448,7 @@ if analysis=='数据可视化分析':
 else:
     st.title('音乐流派分类Demo')
     st.write('本项目基于深度学习中的迁移学习算法，利用图像领域的预训练模型Resnet50，结合GTZAN数据集中音乐文件的梅尔谱图，对输入文件的音乐流派进行预测分析。')
+    st.write('注：由于不同数据集分布的多样性，为保证分类准确率，请尽量使用GTZAN数据集中的音乐曲目进行试验。关于数据分布的问题，将在后续研究中继续进行...')
     st.write('所涉及音乐流派：蓝调，古典，乡村，迪斯科，嘻哈，爵士，金属，流行，雷鬼，摇滚。')
     st.subheader('请上传想要预测的音频文件。')
     wav_files = st.file_uploader("选择文件", type="wav", accept_multiple_files=True)
