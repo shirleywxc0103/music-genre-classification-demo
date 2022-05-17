@@ -276,13 +276,15 @@ class Runner(object):
         print(f"model loading done")
 
         self.criterion = torch.nn.CrossEntropyLoss()
-        self.device = torch.device("cuda")
+        # self.device = torch.device("cuda")
+        self.device = torch.device("cpu")
 
-        if hparams.device > 0:
-            torch.cuda.set_device(hparams.device - 1)
-            self.model.cuda(hparams.device - 1)
-            self.criterion.cuda(hparams.device - 1)
-            self.device = torch.device("cuda:" + str(hparams.device - 1))
+
+        # if hparams.device > 0:
+        #     torch.cuda.set_device(hparams.device - 1)
+        #     self.model.cuda(hparams.device - 1)
+        #     self.criterion.cuda(hparams.device - 1)
+        #     self.device = torch.device("cuda:" + str(hparams.device - 1))
 
     # Accuracy function works like loss function in PyTorch
     def accuracy(self, source, target):
